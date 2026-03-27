@@ -107,7 +107,7 @@
       z-index: 10;
     }
     
-    .hover-overlay {
+    #hoverCanvas {
       position: absolute;
       top: 0;
       left: 0;
@@ -115,48 +115,6 @@
       height: 100%;
       pointer-events: none;
       z-index: 5;
-      display: none;
-    }
-    
-    .hover-overlay.active {
-      display: block;
-    }
-    
-    .hover-overlay.light {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-    }
-    
-    .hover-overlay.dark {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
-    }
-    
-    .hover-label {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      font-size: 18px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      background: rgba(59, 130, 246, 0.9);
-      pointer-events: none;
-      z-index: 15;
-      display: none;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      white-space: nowrap;
-    }
-    
-    .hover-label.active {
-      display: block;
-    }
-    
-    .hover-label.light {
-      left: 20px;
-    }
-    
-    .hover-label.dark {
-      right: 20px;
     }
     
     @media (max-width: 768px) {
@@ -194,19 +152,6 @@
         font-size: 12px;
         padding: 0 10px;
       }
-      
-      .hover-label {
-        font-size: 14px;
-        padding: 8px 16px;
-      }
-      
-      .hover-label.light {
-        left: 10px;
-      }
-      
-      .hover-label.dark {
-        right: 10px;
-      }
     }
   </style>
 </head>
@@ -215,12 +160,11 @@
   
   <div class="canvas-container">
     <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="hoverCanvas"></canvas>
     <div class="upload-prompt" id="uploadPrompt">
       Click to upload first image<br>
       <small style="color: #555;">Left: Light theme • Right: Dark theme</small>
     </div>
-    <div class="hover-overlay" id="hoverOverlay"></div>
-    <div class="hover-label" id="hoverLabel"></div>
   </div>
   
   <div class="controls">
@@ -244,17 +188,25 @@
   <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
+    const hoverCanvas = document.getElementById('hoverCanvas');
+    const hoverCtx = hoverCanvas.getContext('2d');
     const angleSlider = document.getElementById('angleSlider');
     const angleValue = document.getElementById('angleValue');
     const downloadBtn = document.getElementById('downloadBtn');
     const lightFileInput = document.getElementById('lightFileInput');
     const darkFileInput = document.getElementById('darkFileInput');
     const uploadPrompt = document.getElementById('uploadPrompt');
-    const hoverOverlay = document.getElementById('hoverOverlay');
-    const hoverLabel = document.getElementById('hoverLabel');
     
     let lightImg = null;
     let darkImg = null;
+    
+    // Sync hover canvas size with main canvas
+    function syncHoverCanvasSize() {
+      hoverCanvas.width = canvas.width;
+      hoverCanvas.height = canvas.height;
+    }
+    
+    syncHoverCanvasSize();
     
     // Initial state - disable download button
     downloadBtn.disabled = true;
@@ -356,6 +308,60 @@
       drawMergedImage();
     });
     
+    // Draw hover highlight on canvas
+    function drawHoverHighlight(isLight) {
+      // Only show highlight when both images are loaded
+      if (!lightImg || !darkImg) return;
+      
+      hoverCtx.clearRect(0, 0, hoverCanvas.width, hoverCanvas.height);
+      
+      const angle = parseFloat(angleSlider.value);
+      const angleRad = (angle * Math.PI) / 180;
+      const diagonal = Math.sqrt(hoverCanvas.width ** 2 + hoverCanvas.height ** 2);
+      const baseAngle = Math.atan2(hoverCanvas.height, hoverCanvas.width);
+      
+      // Calculate diagonal line endpoints
+      const x1 = hoverCanvas.width + diagonal * Math.cos(baseAngle + angleRad);
+      const y1 = -diagonal * Math.sin(baseAngle + angleRad);
+      const x2 = -diagonal * Math.cos(baseAngle + angleRad);
+      const y2 = hoverCanvas.height + diagonal * Math.sin(baseAngle + angleRad);
+      
+      // Draw trapezoid outline with glow
+      hoverCtx.save();
+      hoverCtx.beginPath();
+      
+      if (isLight) {
+        // Light theme area (top-left)
+        hoverCtx.moveTo(0, 0);
+        hoverCtx.lineTo(hoverCanvas.width, 0);
+        hoverCtx.lineTo(x1, y1);
+        hoverCtx.lineTo(x2, y2);
+        hoverCtx.lineTo(0, hoverCanvas.height);
+      } else {
+        // Dark theme area (bottom-right)
+        hoverCtx.moveTo(hoverCanvas.width, 0);
+        hoverCtx.lineTo(hoverCanvas.width, hoverCanvas.height);
+        hoverCtx.lineTo(0, hoverCanvas.height);
+        hoverCtx.lineTo(x2, y2);
+        hoverCtx.lineTo(x1, y1);
+      }
+      
+      hoverCtx.closePath();
+      
+      // Fill with subtle color
+      hoverCtx.fillStyle = isLight ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+      hoverCtx.fill();
+      
+      // Draw glowing border
+      hoverCtx.strokeStyle = isLight ? 'rgba(59, 130, 246, 0.8)' : 'rgba(96, 165, 250, 0.8)';
+      hoverCtx.lineWidth = 3;
+      hoverCtx.shadowColor = isLight ? 'rgba(59, 130, 246, 0.6)' : 'rgba(96, 165, 250, 0.6)';
+      hoverCtx.shadowBlur = 10;
+      hoverCtx.stroke();
+      
+      hoverCtx.restore();
+    }
+    
     // Mouse hover effect on canvas
     canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
@@ -369,19 +375,12 @@
       const canvasY = y * scaleY;
       
       const isLight = isPointOnLightSide(canvasX, canvasY);
-      
-      // Update overlay
-      hoverOverlay.className = 'hover-overlay active ' + (isLight ? 'light' : 'dark');
-      
-      // Update label
-      hoverLabel.className = 'hover-label active ' + (isLight ? 'light' : 'dark');
-      hoverLabel.textContent = isLight ? '☀️ Upload Light Theme' : '🌙 Upload Dark Theme';
+      drawHoverHighlight(isLight);
     });
     
     // Remove hover effect when mouse leaves
     canvas.addEventListener('mouseleave', () => {
-      hoverOverlay.className = 'hover-overlay';
-      hoverLabel.className = 'hover-label';
+      hoverCtx.clearRect(0, 0, hoverCanvas.width, hoverCanvas.height);
     });
     
     // Click on canvas to replace images
@@ -416,6 +415,7 @@
             if (!darkImg || !canvas.width || canvas.width === 800) {
               canvas.width = lightImg.width;
               canvas.height = lightImg.height;
+              syncHoverCanvasSize();
             }
             updateUI();
             drawMergedImage();
@@ -439,6 +439,7 @@
             if (!lightImg || !canvas.width || canvas.width === 800) {
               canvas.width = darkImg.width;
               canvas.height = darkImg.height;
+              syncHoverCanvasSize();
             }
             updateUI();
             drawMergedImage();
