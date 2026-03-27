@@ -1,16 +1,16 @@
 <div align="center">
 
-# 🎨 Merge Image
+# 🎨 Theme Merge
 
 **A beautiful web tool for creating diagonal split comparisons of light and dark theme screenshots**
 
-[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen?style=for-the-badge)](https://tageecc.github.io/merge-image/)
-[![GitHub Stars](https://img.shields.io/github/stars/tageecc/merge-image?style=for-the-badge)](https://github.com/tageecc/merge-image/stargazers)
-[![License](https://img.shields.io/github/license/tageecc/merge-image?style=for-the-badge)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen?style=for-the-badge)](https://tageecc.github.io/theme-merge/)
+[![GitHub Stars](https://img.shields.io/github/stars/tageecc/theme-merge?style=for-the-badge)](https://github.com/tageecc/theme-merge/stargazers)
+[![License](https://img.shields.io/github/license/tageecc/theme-merge?style=for-the-badge)](LICENSE)
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[🚀 Try it now](https://tageecc.github.io/merge-image/) • [📖 Documentation](#features) • [💬 Feedback](https://github.com/tageecc/merge-image/issues)
+[🚀 Try it now](https://tageecc.github.io/theme-merge/) • [📖 Documentation](#features) • [💬 Feedback](https://github.com/tageecc/theme-merge/issues)
 
 </div>
 
@@ -37,18 +37,18 @@
 
 ### Online Version (Recommended)
 
-Simply visit **[https://tageecc.github.io/merge-image/](https://tageecc.github.io/merge-image/)** and start using it immediately!
+Simply visit **[https://tageecc.github.io/theme-merge/](https://tageecc.github.io/theme-merge/)** and start using it immediately!
 
 ### Local Development
 
 1. Clone the repository
 ```bash
-git clone https://github.com/tageecc/merge-image.git
+git clone https://github.com/tageecc/theme-merge.git
 ```
 
 2. Open `index.html` in your browser
 ```bash
-cd merge-image
+cd theme-merge
 open index.html  # macOS
 # or just double-click index.html
 ```
@@ -93,7 +93,7 @@ Perfect for:
 
 Contributions are welcome! Here's how you can help:
 
-1. 🐛 Report bugs by [opening an issue](https://github.com/tageecc/merge-image/issues)
+1. 🐛 Report bugs by [opening an issue](https://github.com/tageecc/theme-merge/issues)
 2. 💡 Suggest new features through issues
 3. 🔧 Submit pull requests with improvements
 4. ⭐ Star this repository if you find it useful!
@@ -119,7 +119,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📮 Contact
 
 - GitHub: [@tageecc](https://github.com/tageecc)
-- Issues: [Report a bug or request a feature](https://github.com/tageecc/merge-image/issues)
+- Issues: [Report a bug or request a feature](https://github.com/tageecc/theme-merge/issues)
 
 ---
 

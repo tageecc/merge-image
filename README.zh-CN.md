@@ -1,16 +1,16 @@
 <div align="center">
 
-# 🎨 Merge Image | 图片合并工具
+# 🎨 Theme Merge | 主题合并工具
 
 **一个精美的在线工具，用于创建亮暗主题对角线分割对比图**
 
-[![在线演示](https://img.shields.io/badge/演示-在线体验-brightgreen?style=for-the-badge)](https://tageecc.github.io/merge-image/)
-[![GitHub Stars](https://img.shields.io/github/stars/tageecc/merge-image?style=for-the-badge)](https://github.com/tageecc/merge-image/stargazers)
-[![许可证](https://img.shields.io/github/license/tageecc/merge-image?style=for-the-badge)](LICENSE)
+[![在线演示](https://img.shields.io/badge/演示-在线体验-brightgreen?style=for-the-badge)](https://tageecc.github.io/theme-merge/)
+[![GitHub Stars](https://img.shields.io/github/stars/tageecc/theme-merge?style=for-the-badge)](https://github.com/tageecc/theme-merge/stargazers)
+[![许可证](https://img.shields.io/github/license/tageecc/theme-merge?style=for-the-badge)](LICENSE)
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[🚀 立即体验](https://tageecc.github.io/merge-image/) • [📖 功能介绍](#-功能特性) • [💬 反馈问题](https://github.com/tageecc/merge-image/issues)
+[🚀 立即体验](https://tageecc.github.io/theme-merge/) • [📖 功能介绍](#-功能特性) • [💬 反馈问题](https://github.com/tageecc/theme-merge/issues)
 
 </div>
 
@@ -37,18 +37,18 @@
 
 ### 在线版本（推荐）
 
-直接访问 **[https://tageecc.github.io/merge-image/](https://tageecc.github.io/merge-image/)** 即可立即使用！
+直接访问 **[https://tageecc.github.io/theme-merge/](https://tageecc.github.io/theme-merge/)** 即可立即使用！
 
 ### 本地开发
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/tageecc/merge-image.git
+git clone https://github.com/tageecc/theme-merge.git
 ```
 
 2. 在浏览器中打开 `index.html`
 ```bash
-cd merge-image
+cd theme-merge
 open index.html  # macOS
 # 或者直接双击 index.html 文件
 ```
@@ -93,7 +93,7 @@ open index.html  # macOS
 
 欢迎贡献代码！你可以通过以下方式参与：
 
-1. 🐛 [提交 Issue](https://github.com/tageecc/merge-image/issues) 报告 bug
+1. 🐛 [提交 Issue](https://github.com/tageecc/theme-merge/issues) 报告 bug
 2. 💡 通过 Issue 提出新功能建议
 3. 🔧 提交 Pull Request 改进代码
 4. ⭐ 如果觉得有用，请给项目点个 Star！
@@ -119,7 +119,7 @@ open index.html  # macOS
 ## 📮 联系方式
 
 - GitHub: [@tageecc](https://github.com/tageecc)
-- Issues: [报告问题或提出建议](https://github.com/tageecc/merge-image/issues)
+- Issues: [报告问题或提出建议](https://github.com/tageecc/theme-merge/issues)
 
 ---
 
