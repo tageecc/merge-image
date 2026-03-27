@@ -26,12 +26,27 @@
       cursor: pointer;
       border: 2px dashed #444;
       border-radius: 8px;
+      max-width: 90vw;
+      max-height: 70vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+    
+    .canvas-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 90vw;
     }
     
     .controls {
       display: flex;
       gap: 15px;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     
     button {
@@ -89,10 +104,44 @@
       font-size: 16px;
       text-align: center;
       pointer-events: none;
+      z-index: 10;
     }
     
-    .canvas-container {
-      position: relative;
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      h1 {
+        font-size: 18px;
+        text-align: center;
+      }
+      
+      canvas {
+        max-width: 95vw;
+        max-height: 60vh;
+      }
+      
+      .controls {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+      
+      label {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      input[type="range"] {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .info {
+        font-size: 12px;
+        padding: 0 10px;
+      }
     }
   </style>
 </head>
